@@ -9,7 +9,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
         //显示返回键
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

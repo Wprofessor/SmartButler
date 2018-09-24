@@ -2,6 +2,7 @@ package com.example.ewew.smartbutler;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -18,6 +19,8 @@ import com.example.ewew.smartbutler.fragment.GirlfFragment;
 import com.example.ewew.smartbutler.fragment.UserFragment;
 import com.example.ewew.smartbutler.fragment.WechatFragment;
 import com.example.ewew.smartbutler.ui.SettingActivity;
+import com.example.ewew.smartbutler.util.L;
+import com.example.ewew.smartbutler.util.ShareUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setElevation(0);
         initData();
         initView();
+
     }
 
     //初始化数据
