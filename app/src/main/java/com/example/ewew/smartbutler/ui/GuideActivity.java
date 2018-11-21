@@ -1,5 +1,6 @@
 package com.example.ewew.smartbutler.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,19 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.ewew.smartbutler.MainActivity;
 import com.example.ewew.smartbutler.R;
 import com.example.ewew.smartbutler.util.L;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager mViewPager;
     private List<View> mList = new ArrayList<>();
     private View view1, view2, view3;
     private ImageView point1, point2, point3;
-
+    //跳过
+    private ImageView iv_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,9 @@ public class GuideActivity extends AppCompatActivity {
 
     //初始化
     private void initView() {
+
+        iv_back = (ImageView)findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(this);
         point1 = (ImageView) findViewById(R.id.point1);
         point2 = (ImageView) findViewById(R.id.point2);
         point3 = (ImageView) findViewById(R.id.point3);
@@ -55,12 +61,15 @@ public class GuideActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         setPointImg(true,false,false);
+                        iv_back.setVisibility(View.VISIBLE);
                         break;
                     case 1:
                         setPointImg(false,true,false);
+                        iv_back.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         setPointImg(false,false,true);
+                        iv_back.setVisibility(View.GONE);
                         break;
                 }
 
@@ -78,6 +87,8 @@ public class GuideActivity extends AppCompatActivity {
         view2 = View.inflate(this, R.layout.pager_item_two, null);
         view3 = View.inflate(this, R.layout.pager_item_three, null);
 
+        view3.findViewById(R.id.btn_start).setOnClickListener(this);
+
         mList.add(view1);
         mList.add(view2);
         mList.add(view3);
@@ -85,6 +96,17 @@ public class GuideActivity extends AppCompatActivity {
         //设置适配器
         mViewPager.setAdapter(new GuideAdapter());
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_start:
+            case R.id.iv_back:
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
     }
 
     class GuideAdapter extends PagerAdapter {
